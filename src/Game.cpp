@@ -4,6 +4,7 @@
 #include <string>
 
 #include "GameState.h"
+#include "IntroState.h"
 
 namespace
 {
@@ -13,7 +14,7 @@ namespace
 }
 
 bears::Game::Game()
-    : mRunning(false)
+    : mRunning(false), mState(NULL)
 {
 }
 
@@ -36,14 +37,17 @@ void bears::Game::Run()
     {
         const int startMS = SDL_GetTicks();
 
+        std::cout << "1" << std::endl;
         input.Update();
 
         const int currentMS = SDL_GetTicks();
 
         const int deltaMS = currentMS - lastMS;
+        std::cout << "2" << std::endl;
 
         this->Update(std::min(deltaMS, MAX_MS_PER_FRAME), input);
         lastMS = currentMS;
+        std::cout << "3" << std::endl;
 
         this->Draw(graphics);
 
@@ -63,19 +67,23 @@ void bears::Game::Run()
 
 void bears::Game::LoadContent(bears::Graphics& graphics)
 {
-    SetState(IntroState(this));
+    SetState(new IntroState(this));
 }
 
 void bears::Game::Update(int deltaMS, bears::Input& input)
 {
+    std::cout << "Updating" << std::endl;
     mState->Update(deltaMS, input);
+    std::cout << "Done updating " << std::endl;
 }
 
 void bears::Game::Draw(bears::Graphics& graphics)
 {
+    std::cout << "Drawing " << std::endl;
     graphics.Clear();
 
     mState->Draw(graphics);
 
     graphics.Update();
+    std::cout << "Done drawing " << std::endl;
 }

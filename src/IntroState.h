@@ -1,4 +1,5 @@
 #include <string>
+#include <vector>
 
 #include "Game.h"
 #include "State.h"
@@ -12,7 +13,7 @@ namespace bears
         public:
             IntroState(Game* game);
 
-            void Update(int deltaMS, Input& input);
+            void Update(const unsigned int deltaMS, Input& input);
             void Draw(Graphics& graphics);
 
         private:
@@ -20,5 +21,9 @@ namespace bears
 
             int elapsedMS;
             int scrollMS;
-    }
+
+            std::vector<std::string> text;
+            bool loaded;
+            bool finishedAnimating;
+    };
 }

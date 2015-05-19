@@ -19,6 +19,7 @@ namespace bears
             bool IsKeyPressed(SDL_Keycode key);
             bool IsKeyReleased(SDL_Keycode key);
             bool IsKeyHeld(SDL_Keycode key);
+            bool IsAnyKeyHeld();
 
             bool WasQuitEvent() { return mQuitEvent; }
 

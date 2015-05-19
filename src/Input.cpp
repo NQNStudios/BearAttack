@@ -48,3 +48,16 @@ bool bears::Input::IsKeyHeld(SDL_Keycode key)
 {
     return mHeldKeys[key];
 }
+
+bool bears::Input::IsAnyKeyHeld()
+{
+    for (auto it = mHeldKeys.begin(); it != mHeldKeys.end(); ++it)
+    {
+        if (it->second)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}

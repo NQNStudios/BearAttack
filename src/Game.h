@@ -15,7 +15,13 @@ namespace bears
             void Run();
             void Quit() { mRunning = false; }
 
-            void SetState(State* state) { mState = state; }
+            void SetState(State* state) {
+                if (mState)
+                {
+                    delete mState;
+                }
+                mState = state;
+            }
 
         private:
             void LoadContent(Graphics& graphics);
