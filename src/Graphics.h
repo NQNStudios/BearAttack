@@ -20,6 +20,8 @@ namespace bears
             void RenderText(std::string text);
 
             void DrawText(std::string text, int x, int y);
+
+            void DrawSprite(SDL_Rect source, int x, int y);
         private:
             SDL_Window* mWindow;
             SDL_Renderer* mRenderer;

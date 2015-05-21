@@ -5,6 +5,7 @@
 #include "State.h"
 #include "Input.h"
 #include "Graphics.h"
+#include "Sprite.h"
 
 namespace bears
 {
@@ -12,6 +13,7 @@ namespace bears
     {
         public:
             IntroState(Game* game);
+            ~IntroState();
 
             void Update(const unsigned int deltaMS, Input& input);
             void Draw(Graphics& graphics);

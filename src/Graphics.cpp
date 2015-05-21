@@ -99,10 +99,13 @@ void bears::Graphics::DrawText(std::string text, int x, int y)
     SDL_RenderCopy(mRenderer, texture, NULL, &destRect);
 }
 
-//void bears::Graphics::LoadSpritesheet(std::string key, const char* path)
-//{
-    //SDL_Surface* sheetSurface = IMG_Load(path);
-    //mSpritesheets[key] = SDL_CreateTextureFromSurface(mRenderer, sheetSurface);
+void bears::Graphics::DrawSprite(SDL_Rect source, int x, int y)
+{
+    SDL_Rect destRect;
+    destRect.x = x;
+    destRect.y = y;
+    destRect.w = source.w;
+    destRect.h = source.h;
 
-    //SDL_FreeSurface(sheetSurface); // clean up
-//}
+    SDL_RenderCopy(mRenderer, mSpritesheet, &source, &destRect);
+}

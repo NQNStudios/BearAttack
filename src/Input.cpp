@@ -61,3 +61,16 @@ bool bears::Input::IsAnyKeyHeld()
 
     return false;
 }
+
+bool bears::Input::IsAnyKeyPressed()
+{
+    for (auto it = mPressedKeys.begin(); it != mPressedKeys.end(); ++it)
+    {
+        if (it-> second)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
