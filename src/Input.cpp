@@ -30,6 +30,12 @@ void bears::Input::Update()
                     mHeldKeys[event.key.keysym.sym] = false;
                 }
                 break;
+            case SDL_MOUSEBUTTONDOWN:
+                // TODO handle
+                break;
+            case SDL_MOUSEBUTTONUP:
+                // TODO handle
+                break;
         }
     }
 }
