@@ -5,6 +5,9 @@ void bears::Input::Update()
     mPressedKeys.clear();
     mReleasedKeys.clear();
 
+    wasLeftMouseDown = leftMouseDown;
+    wasRightMouseDown = rightMouseDown;
+
     SDL_Event event;
 
     while (SDL_PollEvent(&event))
@@ -31,10 +34,26 @@ void bears::Input::Update()
                 }
                 break;
             case SDL_MOUSEBUTTONDOWN:
-                // TODO handle
+                switch (event.button.button)
+                {
+                    case SDL_BUTTON_LEFT:
+                        leftMouseDown = true;
+                    case SDL_BUTTON_RIGHT:
+                        rightMouseDown = true;
+                }
                 break;
             case SDL_MOUSEBUTTONUP:
-                // TODO handle
+                switch (event.button.button)
+                {
+                    case SDL_BUTTON_LEFT:
+                        leftMouseDown = false;
+                    case SDL_BUTTON_RIGHT:
+                        rightMouseDown = false;
+                }
+                break;
+            case SDL_MOUSEMOTION:
+                mouseX = event.motion.x;
+                mouseY = event.motion.y;
                 break;
         }
     }
@@ -79,4 +98,14 @@ bool bears::Input::IsAnyKeyPressed()
     }
 
     return false;
+}
+
+bool bears::Input::IsLeftMouseClicked()
+{
+    return leftMouseDown && !wasLeftMouseDown;
+}
+
+bool bears::Input::IsRightMouseClicked()
+{
+    return rightMouseDown && !wasRightMouseDown;
 }

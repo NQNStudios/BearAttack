@@ -14,7 +14,6 @@ namespace
 
 bears::Graphics::Graphics()
 {
-    std::cout << "Starting to build Graphics" << std::endl;
 
     int flags = IMG_INIT_PNG;
     IMG_Init(flags);
@@ -44,7 +43,6 @@ bears::Graphics::Graphics()
     mSpritesheet = SDL_CreateTextureFromSurface(mRenderer, sheetSurface);
     SDL_FreeSurface(sheetSurface);
 
-    std::cout << "Done building graphics" << std::endl;
 }
 
 bears::Graphics::~Graphics()
@@ -77,14 +75,11 @@ void bears::Graphics::Update()
 
 void bears::Graphics::RenderText(std::string text)
 {
-    std::cout << "Starting to render text " << text << std::endl;
     SDL_Color color = { 255, 255, 255, 255 };
     SDL_Surface* tempSurf = TTF_RenderText_Solid(mFont, text.c_str(), color);
-    std::cout << "got surface" << std::endl;
     textGlyphs[text] = SDL_CreateTextureFromSurface(mRenderer, tempSurf);
 
     SDL_FreeSurface(tempSurf);
-    std::cout << "Done rendering text " << std::endl;
 }
 
 void bears::Graphics::DrawText(std::string text, int x, int y)

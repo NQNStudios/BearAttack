@@ -26,5 +26,9 @@ namespace bears
             
             bool attacking;
             bool attached;
+
+            bool MoveToTarget(int deltaMS, bool centered);
+            int GetFollowX(Player* player);
+            int GetFollowY(Player* player);
     };
 }

@@ -10,7 +10,9 @@ namespace bears
     {
         public:
             Input()
-                : mQuitEvent(false)
+                : mQuitEvent(false), mouseX(0), mouseY(0),
+                leftMouseDown(false), wasLeftMouseDown(false),
+                rightMouseDown(false), wasRightMouseDown(false)
             {
             }
 
@@ -22,12 +24,24 @@ namespace bears
             bool IsAnyKeyHeld();
             bool IsAnyKeyPressed();
 
+            bool IsLeftMouseClicked();
+            bool IsRightMouseClicked();
+            int MouseX() { return mouseX; }
+            int MouseY() { return mouseY; }
+
             bool WasQuitEvent() { return mQuitEvent; }
 
         private:
             std::map<SDL_Keycode, bool> mHeldKeys;
             std::map<SDL_Keycode, bool> mPressedKeys;
             std::map<SDL_Keycode, bool> mReleasedKeys;
+
+            int mouseX, mouseY;
+            bool leftMouseDown;
+            bool wasLeftMouseDown;
+
+            bool rightMouseDown;
+            bool wasRightMouseDown;
 
             bool mQuitEvent;
     };

@@ -21,6 +21,9 @@ namespace bears
             int GetX() { return x; }
             int GetY() { return y; }
 
+            int GetCenterX() { return x + source_rect.w / 2; }
+            int GetCenterY() { return y + source_rect.h / 2; }
+
             void Move(int dx, int dy);
         private:
             SDL_Rect source_rect;
