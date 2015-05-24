@@ -15,6 +15,7 @@ namespace bears
             void Update(Player* player, int deltaMS);
             void Draw(Graphics& graphics);
             void Attack(int x, int y);
+            Sprite* GetSprite() { return sprite; }
         private:
             Sprite* sprite;
             Sprite* meanSprite;

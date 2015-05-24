@@ -13,7 +13,7 @@ namespace
     const int SCROLL_MULTIPLIER = 10;
 
     const int START_Y = 720;
-    const int FINISH_Y = 40;
+    const int FINISH_Y = 20;
 
 }
 
@@ -23,7 +23,6 @@ namespace bears
         : game(game), elapsedMS(0), scrollMS(SCROLL_MS), loaded(false),
         finishedAnimating(false)
     {
-        std::cout << "Making an intro state" << std::endl;
         text.push_back("23. And he went up from thence unto Bethel:");
         text.push_back("and as he was going up by the way,");
         text.push_back("there came forth little children out");
@@ -43,6 +42,11 @@ namespace bears
         text.push_back("");
         text.push_back("2 Kings 2:23-25");
         text.push_back("The King James Bible");
+        text.push_back("");
+        text.push_back("");
+        text.push_back("Move with WASD.");
+        text.push_back("Right/Left click to control she bears.");
+        text.push_back("Tare all 42 children.");
     }
 
     IntroState::~IntroState()
@@ -83,6 +87,7 @@ namespace bears
                 graphics.RenderText(*it);
             }
 
+
             loaded = true;
         }
 
@@ -106,8 +111,7 @@ namespace bears
         {
             if ((elapsedMS / 600) % 2 == 1)
             {
-                std::cout << "mmmmmmmmmmmmmmmmmmm" << std::endl;
-                graphics.DrawText(std::string("Press any button to continue."), 200, 600);
+                graphics.DrawText(std::string("Press any button to continue."), 800, 500);
             }
         }
     }

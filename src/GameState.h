@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "Bear.h"
 #include "Sprite.h"
+#include "Kid.h"
 
 namespace bears
 {
@@ -28,8 +29,10 @@ namespace bears
             Player* player;
             std::vector<Bear*> bears;
 
+            std::vector<Kid*> kids;
+
             Sprite* tileSprite;
 
-            void gameOver();
+            void gameOver(bool win);
     };
 }

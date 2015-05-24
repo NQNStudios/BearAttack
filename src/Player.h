@@ -17,6 +17,10 @@ namespace bears
 
             int GetX() { return sprite->GetX(); }
             int GetY() { return sprite->GetY(); }
+            int GetCenterX() { return sprite->GetCenterX(); }
+            int GetCenterY() { return sprite->GetCenterY(); }
+
+            Sprite* GetSprite() { return sprite; }
         private:
             Sprite* sprite;
     };

@@ -5,6 +5,8 @@
 #include <sstream>
 #include <algorithm>
 
+#include "GameOverState.h"
+
 #include "Game.h"
 
 bears::GameState::GameState(Game* game)
@@ -15,6 +17,11 @@ bears::GameState::GameState(Game* game)
     bears.push_back(new Bear(true)); // right bear
     bears.push_back(new Bear(false)); // left bear
 
+    for (int i = 0; i < 42; ++i)
+    {
+        kids.push_back(new Kid());
+    }
+
     tileSprite = new Sprite({ 36, 244, 100, 100 }, 0, 0);
 }
 
@@ -23,6 +30,8 @@ bears::GameState::~GameState()
     delete player;
 
     std::for_each(bears.begin(), bears.end(), [](Bear* bear){ delete bear; });
+    std::for_each(kids.begin(), kids.end(), [](Kid* kid){ delete kid; });
+
 }
 
 void bears::GameState::Update(unsigned int deltaMS, bears::Input& input)
@@ -38,8 +47,38 @@ void bears::GameState::Update(unsigned int deltaMS, bears::Input& input)
         (*(bears.begin()))->Attack(input.MouseX(), input.MouseY());
     }
 
+    std::for_each(kids.begin(), kids.end(),
+            [this, deltaMS](Kid* kid)
+            {
+                kid->Update(deltaMS, player);
+
+                Sprite* bearOne = bears[false]->GetSprite();
+                Sprite* bearTwo = bears[true]->GetSprite();
+                Sprite* playerSprite = player->GetSprite();
+
+                Sprite* kidSprite = kid->GetSprite();
+
+                if (kidSprite->Collision(playerSprite))
+                {
+                    // TODO kill player 
+                    this->gameOver(false);
+
+                }
+
+                if (kidSprite->Collision(bearOne) || kidSprite->Collision(bearTwo))
+                {
+                    // TODO kill kid
+                    std::cout << "killed a kid" << std::endl;
+                }
+            });
+
     std::for_each(bears.begin(), bears.end(),
-            [this, deltaMS](Bear* bear){ bear->Update(player, deltaMS); });
+            [this, deltaMS](Bear* bear){
+                bear->Update(player, deltaMS);
+
+            });
+
+    // TODO check for dead kids
 }
 
 void bears::GameState::Draw(bears::Graphics& graphics)
@@ -61,10 +100,13 @@ void bears::GameState::Draw(bears::Graphics& graphics)
 
     player->Draw(graphics);
 
+    std::for_each(kids.begin(), kids.end(),
+            [&graphics](Kid* kid){ kid->Draw(graphics); });
     std::for_each(bears.begin(), bears.end(),
             [&graphics](Bear* bear){ bear->Draw(graphics); });
 }
 
-void bears::GameState::gameOver()
+void bears::GameState::gameOver(bool win)
 {
+    game->SetState(new GameOverState(win));
 }

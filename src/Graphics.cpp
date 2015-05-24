@@ -30,7 +30,7 @@ bears::Graphics::Graphics()
     windowHeight = RESOLUTION_HEIGHT;
 #endif
 
-    mWindow = SDL_CreateWindow("She Bear Attack", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windowWidth, windowHeight, windowFlags);
+    mWindow = SDL_CreateWindow("Bible Stories", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windowWidth, windowHeight, windowFlags);
 
     mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED);
 
